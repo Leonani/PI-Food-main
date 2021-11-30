@@ -105,12 +105,12 @@ router.get('/', async (req,res) => {
         let allRecipes = await getAll();
         res.status(200).send(allRecipes)
     }
-})
+})  
 
-route.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     const id = req.params.id;
     const allRecipes = await getAll();
-    if(id.length>12) {
+    if(id) {
         let recipeId = await allRecipes.filter(e => e.id == id)
         recipeId.length?res.status(200).json(recipeId):res.status(404).send('No se encontro la receta')
     }

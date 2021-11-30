@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router()
+// const express = require('express');
+// const router = express.Router()
 // const {Recipe, Diet} = require('../db');
 // const server} = require('../app');
 // let ejs = require('ejs');
@@ -19,4 +19,4 @@ const router = express.Router()
 //     res.status(404).render("404")
 // })
 
-module.exports = router;
+// module.exports = router;

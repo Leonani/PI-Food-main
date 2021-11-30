@@ -4,7 +4,7 @@ require('dotenv').config();
 const { Recipe, Diet, Op } = require('../db');
 
 router.post('/', async (req, res) => {
-    //creamos el post con todo lo que llega del body
+    //hago el post con todo lo que llega del body
     let{
         name,
         summary,
@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
         diets
     } = req.body
 
-    try{ //creamos la dieta
+    try{ //creo la receta
         let recipeCreate = await Recipe.create({ 
             name,
             summary,
