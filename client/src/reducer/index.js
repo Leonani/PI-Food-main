@@ -1,18 +1,20 @@
 const initialState = {
-    recipes = []
+    recipes : []
 }
 
 function rootReducer(state= initialState, action){
+    
     switch (action.type) {
         case 'GET_RECIPES':
+            console.log(action.type)
             return {
                 ...state,
                 recipes: action.payload  
             }
-            break;
+            
     
         default:
-            break;
+          return state;
     }
 }
 

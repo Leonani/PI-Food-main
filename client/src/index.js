@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {provider} from 'react-redux';
-import {store} from './store'
+import {Provider} from 'react-redux';
+import {store} from './store/index'
 
 //se envuelve el render en un 'provider' para que funcione redux
 ReactDOM.render(
-  <provider store = {store}> 
+  <Provider store = {store}> 
     <React.StrictMode>
       <App />
     </React.StrictMode>
-  </provider>,
+  </Provider>,
   document.getElementById('root')
 );
 

@@ -1,11 +1,15 @@
 import './App.css';
-import {BrowserRouter, Router, Switch } from 'react-router-dom';
-
+import {BrowserRouter, Route, Switch } from 'react-router-dom';
+import LandingPg from './components/landingPg'
+import Home from './components/home';
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <h1>Henry Food</h1>
+        <Switch> 
+          <Route exact path= '/' component= {LandingPg}/> 
+          <Route path= '/home' component= {Home}/> 
+        </Switch>
       </div>
     </BrowserRouter>
   );
