@@ -11,4 +11,4 @@ export function getRecipes() {
             payload: json.data
         })
     }
-}
+}  
