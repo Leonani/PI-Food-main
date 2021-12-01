@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
-import {store} from './store/index'
+import store from './store/index'
 
 //se envuelve el render en un 'provider' para que funcione redux
 ReactDOM.render(
