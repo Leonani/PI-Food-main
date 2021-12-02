@@ -2,31 +2,66 @@ import axios from 'axios';
 
 
 //coneccion del back con el front
-// export function getRecipes() {
-   
-    // console.log('uhagvudfy');
+export function getRecipes() {
     
-    // return async function(dispatch) {
+    return async function(dispatch) {
 
-    //     let json = await axios.get('http://localhost:3001/recipes');
-    //     return dispatch({
-    //         type: 'GET_RECIPES',
-    //         payload: json.data
-    //     })
-            
-    // }
-    
+        let json = await axios.get('http://localhost:3001/recipes');
+        return dispatch({
+            type: 'GET_RECIPES',
+            payload: json.data
+        })
+    }
+}
+
+// export function getRecipes(){
+//     return  function(dispatch){
+//         axios.get('http://localhost:3001/recipes')
+//             .then((json) => {
+//             return dispatch({
+//                 type:'GET_RECIPES',
+//                 payload: json.data
+//             })
+//         }).catch((error) => {
+//             console.log(error)
+//         })
+//     }
 // }
-export function getRecipes(){
-    return  function(dispatch){
-        axios.get('http://localhost:3001/recipes')
-            .then((json) => {
+
+//------------------busqueda-------------------------------
+export function getNameRecipes(name){
+    return async function(dispatch){
+        try{
+            var json = await axios.get('http://localhost:3001/recipes?name=' + name);
             return dispatch({
-                type:'GET_RECIPES',
+                type: 'GET_NAME_RECIPES',
                 payload: json.data
             })
-        }).catch((error) => {
-            console.log(error)
-        })
+            
+        }catch(err){
+            console.log(err)
+        }
+    }
+}
+//-----------------actions filters busqueda-------------------//evitemos porner logica en acciones, hacerlo en reducer
+
+export function filetrRecipesByTypes(payload){
+    return{ 
+        type: 'FILTER_BY_TYPE_RECIPE',
+        payload
+    }
+}
+
+export function filterRecipesByCreated(payload){
+    return{
+        type: 'FILTER_BY_CREATED_RECIPE',
+        payload
+    }
+}
+
+export function orderByName(payload){
+    return{
+        type: 'FILTER_BY_ORDER',
+        payload
     }
 }

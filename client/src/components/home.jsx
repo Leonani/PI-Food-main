@@ -2,54 +2,97 @@ import React, { Fragment } from "react"
 import {useState, useEffect} from 'react'
 //hooks
 import {useDispatch, useSelector} from 'react-redux'
-import {getRecipes} from '../actions/index'
+import {getRecipes, filetrRecipesByTypes, filterRecipesByCreated, orderByName} from '../actions/index'
 import {Link} from 'react-router-dom'
 import Cards from "./cardsRecipe"
+import Paginado from "./paginado"
+import SearchBar from "./searchBar"
 
 export default function Home(){
-    const dispatch = useDispatch(); // para usar la constante y despachar las acciones
-    const allRecipes = useSelector((state) => state.recipes); // traigo todo lo que esta en el estado de redipes
+    // para usar la constante y despachar las acciones
+    const dispatch = useDispatch(); 
+    // traigo todo lo que esta en el reducer los estado de recipes
+    const allRecipes = useSelector((state) => state.recipes);   
+
+    //paginado
+    const [orden, setOrden] = useState('');
+    //se guarda en una const el estado local y se seteamos la pagina actual y empieza en el paginado 1
+    const [currentPg, setCurrentPg] = useState(1);
+    //guardo cuantas recetas quiero por pg
+    const [recipesPg, setRecipesPg] = useState(9);
+    const indexOfLastRecipe = currentPg * recipesPg; //9
+    const indexOfFirstRecipe = indexOfLastRecipe - recipesPg; //0
+    //cortamos el array de recipes para mostar por pg
+    const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+
+    const paginado = (pgNumber) => {
+        setCurrentPg(pgNumber)
+    }
     
+
     //traigo del estado las recetas cuando el componente se monta
     useEffect(() => {
         dispatch(getRecipes());
     },[dispatch])   //este array es para que no sea infinito
 
    
-
     //creo evento para botones
     function handleClick(e){
 
         e.preventDefault(); //para que no se rompa
         dispatch(getRecipes()); //recetea
     }
+
+    function handleFilterTypes(e){
+        dispatch(filetrRecipesByTypes(e.target.value))
+    }
+
+    function handleFilterCreated(e){
+        dispatch(filterRecipesByCreated (e.target.value))
+    }
+
+    function handleSort(e){
+        e.preventDefault();
+        dispatch(orderByName(e.target.value));
+        setCurrentPg(1);
+        setOrden(`ordenado ${e.target.value}`)
+    }
+
     //renderizo
     return(
         <div>
             <Link to= '/recipes'>Crear receta</Link>
-            <h1>botoncito</h1>
-            <button onClick= {e => {handleClick(e)}}></button>
+            {/* <h1>botoncito</h1> */}
+            <SearchBar/>
+            <button onClick= {e => {handleClick(e)}}>Recargar Recetas</button>
             <div>
-                <select>
+                <select onChange={e => handleSort(e)}>
                     <option value="asc">Ascendente</option>
                     <option value="desc">Descendente</option>
                 </select>
-                <select>
-                    <option value="glu">gluten free</option>
-                    <option value="free">dairy free</option>
-                    <option value="paleo">paleolithic</option>
-                    <option value="lacto">lacto ovo vegetarian</option>
-                    <option value="pri">primal</option>
-                    <option value="veg">vegan</option>
-                    <option value="dai">dairy free</option>                    
+                <select onChange={e => handleFilterTypes(e)}>
+                    <option value="gluten free">Gluten free</option>
+                    <option value="dairy free">Dairy free</option>
+                    <option value="paleolithic">Paleolithic</option>
+                    <option value="lacto ovo vegetarian">Lacto ovo vegetarian</option>
+                    <option value="primal">Primal</option>
+                    <option value="vegan">Vegan</option>                                     
                 </select>
-                <select>
-                    <option value="todas">Todas las Recetas</option>
-                    <option value="crea">Recetas Creadas</option>
+                <select onChange={e => handleFilterCreated(e)}>
+                    <option value="all">Todas las Recetas</option>
+                    <option value="created">Recetas Creadas</option>
                     <option value="api">Recetas Api</option>
                 </select>
+
+                {/* traigo las cruds que necesito para el paginado */}
+                <Paginado 
+                recipesPg= {recipesPg}
+                allRecipes= {allRecipes.length}
+                paginado= {paginado}
+                />
+
                 {
-                    allRecipes?.map((leo) => {
+                    currentRecipes?.map((leo) => {
                         return (
                             <Fragment>
                                 <Link to={'/home/' + leo.id}>
