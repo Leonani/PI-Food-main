@@ -29,14 +29,15 @@
 .bt {
     width: 400px;
     margin: 15px;
-    padding: 10px;
+    padding: 10px;   
+    border: black solid 2px;
     border-radius: 5px;
 
     font-family: 'Indie Flower', cursive;
     font-size: 20px;
 
     color: rgb(232, 255, 28);
-    background-color: rgba(0, 0, 0, 0.507);
+    background-color: rgba(0, 0, 0, 0.623);
 }
 
 .bt:hover {
@@ -55,6 +56,8 @@
 
     color: rgb(232, 255, 28);
     background-color: rgba(0, 0, 0, 0.507);
+    border: black solid 2px;
+    border-radius: 5px;
 }
 
 .lala{

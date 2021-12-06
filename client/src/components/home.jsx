@@ -8,6 +8,7 @@ import Cards from "./cardsRecipe"
 import Paginado from "./paginado"
 import SearchBar from "./searchBar"
 import NavBar from "./navbar"
+import Card from "./cardsRecipe"
 import './css/home.css'
 
 export default function Home(){
@@ -105,7 +106,7 @@ console.log(allDiets)
                             </select>
                         </div>
                     </div>
-
+                    <Card/>
                     {/* traigo las cruds que necesito para el paginado */}
                     <Paginado 
                     recipesPg= {recipesPg}

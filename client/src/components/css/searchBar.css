@@ -20,6 +20,8 @@
 
     color: rgb(232, 255, 28);
     background-color: rgba(0, 0, 0, 0.507);
+    border: black solid 2px;
+    border-radius: 5px;
 }
 
 .cont button {
@@ -30,6 +32,8 @@
 
     color: rgb(232, 255, 28);
     background-color: rgba(0, 0, 0, 0.507);
+    border: black solid 2px;
+    border-radius: 5px;
 }
 
 .cont button:hover {

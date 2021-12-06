@@ -19,12 +19,9 @@
 
 .text{
     margin: 80px;    
-    color: rgba(239, 252, 52, 0.726);    
+    color: rgb(232, 255, 28);    
     text-shadow: 5px 5px 10px rgb(81, 122, 81);
-    display: flexbox;
-    align-items: center;
-    justify-content: center;
-
+   
     -webkit-transform: rotate(-8deg); 
     -moz-transform: rotate(-8deg);
     -o-transform: rotate(-8deg);

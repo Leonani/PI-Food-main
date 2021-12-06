@@ -16,10 +16,9 @@ export default function NavBar() {
             </div>
             <div className='botoncitos'>
                 <ul>
-                    
-                <Link to='/home'><li><button className='bth'>Home</button></li></Link>
-                <Link to= '/recipes'><li><button className='btc'>Crear receta</button></li></Link>
-                    
+                    <Link to='/'><li><button className='bth'>Landing</button></li></Link>    
+                    <Link to='/home'><li><button className='bth'>Home</button></li></Link>
+                    <Link to= '/recipes'><li><button className='btc'>Crear receta</button></li></Link>
                 </ul>
             </div>
         </div>

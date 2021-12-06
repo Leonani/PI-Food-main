@@ -2,7 +2,8 @@ import React, {useState, useEffect} from "react";
 import {Link, useHistory} from 'react-router-dom';
 import {postRecipes, getDiets} from '../actions/index';
 import { useDispatch, useSelector } from "react-redux";
-
+import NavBar from "./navbar"
+import './css/recipeCreate.css'
 
 // function validate(input) {
 //     let errors = {};
@@ -69,57 +70,68 @@ export default function RecipeCreate() {
     
     return (
         <div>
-            <Link To= '/home'><button>Atras</button></Link>
-            <h1>Crea tu Receta</h1>
-            <form onSubmit={e => handleSelect(e)}>
-                <div>
-                    <label>Nombre:</label>
-                    <input type= 'text' value= {input.title} name='title' onChange={e => handleChange(e)}/>
-                    {/* {errors.name && (
-                        <p className= 'error'>{errors.name}</p>
-                    )} */}
-                    <br />
-                    <label>Tipo de dieta:</label>
-                    <select onChange={e => handleSelect(e)}>
-                        {/* <option value="gluten free">gluten free</option>
-                        <option value="dairy free">dairy free</option>
-                        <option value="paleolithic">paleolithic</option>
-                        <option value="lacto ovo vegetarian">lacto ovo vegetarian</option>
-                        <option value="primal">primal</option>
-                        <option value="vegan">vegan</option>
-                        <option value="Pescatarian">Pescatarian</option>
-                        <option value="whole 30">whole 30</option>
-                        <option value=""></option> */}
-                        {diets.map(d => (
-                            <option value={d.name}>{d.name}</option>
-                        ))}
-                    </select>
-                    <br /> 
-                    {/* <ul><li>{input.diets.map(el => el + ' ,')}</li></ul> */}
-                    <br />
-                    <label>Puntaje:</label>
-                    <input type= 'number' value={input.spoonacularScore} name='spoonacularScore' onChange={e => handleChange(e)}/> 
-                    <br />
-                    <label>Tipo de Plato:</label>
-                    <input type= 'text' value={input.dishTypes} name='dishTypes' onChange={e => handleChange(e)}/> 
-                    <br />
-                    <label>Resumen:</label>
-                    <input type= 'text' value={input.summary} name='summary' onChange={e => handleChange(e)}/> 
-                    <br />
-                    <label>Puntaje saludable:</label>
-                    <input type= 'Number' value={input.healthScore} name='healthScore' onChange={e => handleChange(e)}/> 
-                    <br />
-                    <label>imagen:</label>
-                    <input type= 'text' value={input.image} name='image' onChange={e => handleChange(e)}/> 
-                    <br />
-                    <label>Paso a paso:</label>
-                    {/* <input type= 'text' value={input.analyzedInstructions} name='analyzedInstructions'/>   */}
-                    <textarea type= 'text' value={input.analyzedInstructions} name='analyzedInstructions' onChange={e => handleChange(e)}></textarea>
-                    <br />
-                    <button type='submit' onChange={e => handleSubmit(e)}>Crear</button>
+            <div>
+                <NavBar/>
+            </div>   
+            <div className='createR'>
+                <div className='allF'>
+                    <h1>Crea tu Receta</h1> 
                     
-                </div>
-            </form>
+                    <div className='formulario'>
+                        
+                        <form onSubmit={e => handleSelect(e)}>
+                            <div className='line'>
+                            <label>Nombre:</label>
+                            <input type= 'text' value= {input.title} name='title' onChange={e => handleChange(e)}/>
+                            {/* {errors.name && (
+                                <p className= 'error'>{errors.name}</p>
+                            )} */}                            
+                            </div>
+                            <div className='line'>
+                            <label>Tipo de dieta:</label>
+                            <select onChange={e => handleSelect(e)}>                               
+                                {diets.map(d => (
+                                    <option value={d.name}>{d.name}</option>
+                                ))}
+                            </select>
+                            </div> 
+                            <div className='line'>
+                            {/* <ul><li>{input.diets.map(el => el + ' ,')}</li></ul> */}
+                            </div>
+                            <div className='line'>
+                            <label>Puntaje:</label>
+                            <input type= 'number' value={input.spoonacularScore} name='spoonacularScore' onChange={e => handleChange(e)}/> 
+                            </div>
+                            <div className='line'>
+                            <label>Tipo de Plato:</label>
+                            <input type= 'text' value={input.dishTypes} name='dishTypes' onChange={e => handleChange(e)}/> 
+                            </div>
+                            <div className='line'>
+                            <label>Resumen:</label>
+                            <input type= 'text' value={input.summary} name='summary' onChange={e => handleChange(e)}/> 
+                            </div>
+                            <div className='line'>
+                            <label>Puntaje saludable:</label>
+                            <input type= 'Number' value={input.healthScore} name='healthScore' onChange={e => handleChange(e)}/> 
+                            </div>
+                            <div className='line'>
+                            <label>imagen:</label>
+                            <input type= 'text' value={input.image} name='image' onChange={e => handleChange(e)}/> 
+                            </div>
+                            <div className='line'>
+                            <label>Paso a paso:</label>
+                            {/* <input type= 'text' value={input.analyzedInstructions} name='analyzedInstructions'/>   */}
+                            <textarea type= 'text' value={input.analyzedInstructions} name='analyzedInstructions' onChange={e => handleChange(e)}></textarea>
+                            </div>
+                           
+                            
+                            <button className='bts' type='submit' onChange={e => handleSubmit(e)}>Crear</button>
+                            
+                        
+                        </form>
+                    </div>
+                </div>    
+            </div>
         </div>
     )
 
