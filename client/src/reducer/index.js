@@ -1,6 +1,7 @@
 const initialState = {
     recipes : [],
-    allRecipes : []
+    allRecipes : [],
+    diets : []
 }
 
 //estados
@@ -18,6 +19,11 @@ function rootReducer(state= initialState, action){
             return{
                 ...state,
                 recipes: action.payload,
+            }
+        case 'GET_DIETS':
+            return{
+                ...state,
+                diets: action.payload
             }
         // hago el filtrado del estado inicial
         case 'FILTER_BY_TYPE_RECIPE':
@@ -55,9 +61,12 @@ function rootReducer(state= initialState, action){
                 ...state,
                 recipes: sortArr
             }
-    
+        case 'POST_RECIPE':
+            return{
+                ...state
+            }    
         default:
-          return state;
+        return state;
     }
 }
 

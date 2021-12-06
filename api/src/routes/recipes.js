@@ -15,26 +15,26 @@ const {YOUR_API_KEY} = process.env;
 // peticion data de api food
 const getApiInfo = async () => {
     
-    try {;
-    //traigo la info de la url
-    const apiURL = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=100`)
-    // console.log(apiURL.data);
-    //mapeo la info
-    const apiInfo = await apiURL.data.results.map(e => {
-        //devuelvo la info que se me pide en la consigna
-        return {
-            id: e.id, 
-            title: e.title,
-            img: e.image,
-            typeDiets: e.diets.map((d) => {return{name:d}}), // un array con los tipos de dieta de esa receta
-            spoonacularScore : e.spoonacularScore,   // puntuacion
-            dishTypes: e.dishTypes.map((d) => {return{name:d}}), // tipo de plato
-            summary: e.summary,            // un resumen del plato
-            healthScore: e.healthScore,    // que tan saludable es
-            analyzedInstructions: e.analyzedInstructions// el paso a paso de como se hace 
-        };
-    });
-    return apiInfo;
+    try {
+        //traigo la info de la url
+        const apiURL = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=100`)
+        // console.log(apiURL.data);
+        //mapeo la info
+        const apiInfo = await apiURL.data.results.map(e => {
+            //devuelvo la info que se me pide en la consigna
+            return {
+                id: e.id, 
+                title: e.title,
+                img: e.image,
+                typeDiets: e.diets.map((d) => {return{name:d}}), // un array con los tipos de dieta de esa receta
+                spoonacularScore : e.spoonacularScore,   // puntuacion
+                dishTypes: e.dishTypes.map((d) => {return{name:d}}), // tipo de plato
+                summary: e.summary,            // un resumen del plato
+                healthScore: e.healthScore,    // que tan saludable es
+                analyzedInstructions: e.analyzedInstructions// el paso a paso de como se hace 
+            };
+        });
+        return apiInfo;
     } catch (err){
         return [];
     }
@@ -69,6 +69,9 @@ const getAll = async () => {
     return allInfo
 }
 
+// router.get('/recipes', async (req, res) => 
+// )
+
 //ruteo por query
 router.get('/', async (req,res) => {
 
@@ -93,7 +96,7 @@ router.get('/', async (req,res) => {
         }))
         
         const cl = await getDbInfo()
-        const filtercl = cl.filter(n => n===name)
+        const filtercl = cl.filter(n => n === name.toLocaleLowerCase())
         let recipesName = await infoQuery.concat(filtercl);
 
         //si se encuentra devolvemos y si no mje correspondiente

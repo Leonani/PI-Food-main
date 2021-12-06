@@ -11,11 +11,11 @@ export default function Paginado(recipesPg, allRecipes, paginado){
     return(
         <nav>
             <ul className='paginado'>
-                { pgNumber && pgNumber.map(number => {
+                { pgNumber && pgNumber.map(number => (
                     <li className='number' key={number}>
-                        <a onClick={()=> paginado(number)}>{number}</a>
+                        <a onClick= {()=> paginado(number)} href>{number}</a>
                     </li>    
-                })}
+                ))}
             </ul>
         </nav>
     )

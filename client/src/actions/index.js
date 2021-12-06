@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-//coneccion del back con el front
+//coneccion del back con el front de recipes
 export function getRecipes() {
     
     return async function(dispatch) {
@@ -27,6 +27,24 @@ export function getRecipes() {
 //         })
 //     }
 // }
+
+//-coneccion del back con el front de diets
+export function getDiets(){
+    return async function(dispatch) {
+        var info= await axios('http://localhost:3001/diets');
+        return dispatch ({
+            type: 'GET_DIETS', 
+            payload: info.data
+        })
+    }
+}
+
+export function postRecipes(payload){
+    return async function(dispatch) {
+        const data = await axios.post('http://localhost:3001/recipe', payload)
+        return data;
+    }
+}
 
 //------------------busqueda-------------------------------
 export function getNameRecipes(name){

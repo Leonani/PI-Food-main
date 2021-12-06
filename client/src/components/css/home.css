@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.home {
+    width:  100%;
+    height: 625px;
+   
+   background: url('../../img/home.jpg') center center no-repeat;
+   background-size: 100% auto;
+}
+
+.busqueda {
+    position: absolute;
+    top: 100px;
+    right: 0px;
+
+    display: flex;    
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
+
+    width: 890px;
+    height: 160px;
+    padding: 10px;    
+}
+
+.bt {
+    width: 400px;
+    margin: 15px;
+    padding: 10px;
+    border-radius: 5px;
+
+    font-family: 'Indie Flower', cursive;
+    font-size: 20px;
+
+    color: rgb(232, 255, 28);
+    background-color: rgba(0, 0, 0, 0.507);
+}
+
+.bt:hover {
+    color: rgb(0, 0, 0);
+    background-color: rgba(232, 255, 28, 0.507);
+
+    font-weight: bold;
+}
+
+.home select{
+    width: 31%;
+    padding: 10px;
+    border-radius: 5px;
+
+    font-family: 'Indie Flower', cursive;
+
+    color: rgb(232, 255, 28);
+    background-color: rgba(0, 0, 0, 0.507);
+}
+
+.lala{
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+}
+
+
+
