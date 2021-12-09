@@ -15,7 +15,8 @@ export default function Detail(props){
         dispatch(getDetail(id))
     },[dispatch, id])
 
-    const myRecipe = useSelector(state => state.detail )
+    const myRecipe = useSelector(state => state.detail)
+
     // console.log(myRecipe, 'recetas')
 
     return(
@@ -28,11 +29,11 @@ export default function Detail(props){
                     {
                         myRecipe.length > 0 ?
                         <div>
-                            <h1>{myRecipe[0].title}</h1>
+                            <h1>{myRecipe[0].title ? myRecipe[0].title : myRecipe[0].name}</h1>
                             <img src={myRecipe[0].img ? myRecipe[0].img :'https://st.depositphotos.com/1036708/2191/i/600/depositphotos_21918797-stock-photo-knife-and-fork-with-plate.jpg'} alt="no se encontro la imagen" />  
                             <div className='art'>
                                 <h5>Tipo de dietas:</h5>
-                                <h2>{ myRecipe[0].typeDiets}</h2>
+                                <h2>{ myRecipe[0].typeDiets ? myRecipe[0].typeDiets.map(t =>t.name) : myRecipe[0].typeDiets}</h2>
                             </div>
                             <div className='art'>
                                 <h5>Puntaje:</h5>

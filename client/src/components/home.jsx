@@ -120,7 +120,7 @@ export default function Home(){
                             return (
                                 <div id='Allcars' className='conteiner'>
                                     <Link className='link' to={'/recipes/' + leo.id}>
-                                        <Card className='card' name={leo.title} image={leo.img ? leo.img : leo.image} diets={leo.typeDiets} id={leo.id}/>
+                                        <Card className='card' key={leo.id} name={leo.title} image={leo.img ? leo.img : leo.image} diets={leo.typeDiets} id={leo.id}/>
                                     </Link> 
                                 </div>
                             );

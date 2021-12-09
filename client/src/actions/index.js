@@ -7,7 +7,7 @@ export function getRecipes() {
     return async function(dispatch) {
 
         let json = await axios.get('http://localhost:3001/recipes');
-        console.log(json.data,'get action')
+        // console.log(json.data,'get action')
         return dispatch({
             type: 'GET_RECIPES',
             payload: json.data
@@ -90,9 +90,17 @@ export function getDatabase() {
 }
 
 export function filterRecipesByCreated(payload){
-    return{
-        type: 'FILTER_BY_CREATED_RECIPE',
-        payload
+    return async function (dispatch){
+        try{
+            return dispatch({
+                type: 'FILTER_BY_CREATED_RECIPE',
+                payload
+
+            })
+            
+        }catch(error){
+            console.log(error)
+        }
     }
 }
 
@@ -107,7 +115,7 @@ export function getDetail(id){
     return async function(dispatch) {
         try{
             let json = await axios(`http://localhost:3001/recipes/${id}`)
-            console.log(json.data,'action')
+            // console.log(json.data,'action id')
             return dispatch({
                 type: 'GET_DETAILS',
                 payload: json.data
