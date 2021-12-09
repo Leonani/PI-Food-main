@@ -17,8 +17,9 @@ const getApiInfo = async () => {
     
     try {
         //traigo la info de la url
-        const apiURL = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=100`)
+        const apiURL = await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&addRecipeInformation=true&number=100`)
         // console.log(apiURL.data);
+
         //mapeo la info
         const apiInfo = await apiURL.data.results.map(e => {
             //devuelvo la info que se me pide en la consigna
@@ -33,6 +34,7 @@ const getApiInfo = async () => {
                 healthScore: e.healthScore,    // que tan saludable es
                 analyzedInstructions: e.analyzedInstructions// el paso a paso de como se hace 
             };
+            
         });
         return apiInfo;
     } catch (err){
@@ -64,13 +66,12 @@ const getDbInfo = async () => {
 const getAll = async () => {
     const apiInfo = await getApiInfo();
     const dbInfo = await getDbInfo();
-    console.log(apiInfo, dbInfo)
+    // console.log(apiInfo, dbInfo)
     const allInfo = apiInfo.concat(dbInfo);
     return allInfo
 }
 
-// router.get('/recipes', async (req, res) => 
-// )
+
 
 //ruteo por query
 router.get('/', async (req,res) => {
@@ -96,20 +97,30 @@ router.get('/', async (req,res) => {
         }))
         
         const cl = await getDbInfo()
-        const filtercl = cl.filter(n => n === name.toLocaleLowerCase())
+        const filtercl = cl.filter(n => n === name.toLowerCase())
         let recipesName = await infoQuery.concat(filtercl);
 
         //si se encuentra devolvemos y si no mje correspondiente
-        recipesName.length?res.status(200).send(recipesName):res.status(404).send('Perdon. No se encontro la receta.');  
+        recipesName.length?res.status(200).send(error.message):res.status(404).send(eror.message);  
 
         // si no hay query devolvemos todas las recetas
     } else {
         //traigo info
         let allRecipes = await getAll();
-        res.status(200).send(allRecipes)
+        // console.log(allRecipes)
+        res.status(200).json(allRecipes)
     }
 })  
 
+router.get('/data', async (req, res) => {
+    const allDb= await getDbInfo()
+    if (allDb !== 'error') {
+        res.json(allDb)
+    } else {
+        res.status(404).json({message: 'error en base de datos '})
+    }
+})
+//-------
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
     const allRecipes = await getAll();

@@ -1,10 +1,10 @@
-import React, { Fragment } from "react"  
-import {useState, useEffect} from 'react'
+  import {useState, useEffect} from 'react'
 //hooks
 import {useDispatch, useSelector} from 'react-redux'
 import {getRecipes, filetrRecipesByTypes, filterRecipesByCreated, orderByName} from '../actions/index'
 import {Link} from 'react-router-dom'
-import Cards from "./cardsRecipe"
+
+
 import Paginado from "./paginado"
 import SearchBar from "./searchBar"
 import NavBar from "./navbar"
@@ -16,11 +16,12 @@ export default function Home(){
     const dispatch = useDispatch(); 
     // traigo todo lo que esta en el reducer los estado de recipes
     const allRecipes = useSelector((state) => state.recipes);   //es lo mismo que hacer  mapStateToProps
-    const allDiets = useSelector(state => state.diets)
+    // const allDiets = useSelector(state => state.diets)
+    const diets = useSelector((state) => state.diets)
     //-----------------------------------------------------------
 
-console.log(allDiets)
 
+//08106663368 prisma
 
     //------------------paginado home-----------------------------
     const [orden, setOrden] = useState('');
@@ -35,6 +36,7 @@ console.log(allDiets)
 //------------------------------------------------------------
 
 
+
     const paginado = (pgNumber) => {
         setCurrentPg(pgNumber)
     }
@@ -44,7 +46,7 @@ console.log(allDiets)
     useEffect(() => {
         dispatch(getRecipes());  //hook del matchDispatchToProps()
     },[dispatch])   //este array es para que no sea infinito
-
+    // console.log(currentRecipes)
    
     //creo evento para botones
     function handleClick(e){
@@ -70,13 +72,12 @@ console.log(allDiets)
 
     //renderizo
     return(
-        <div>
+        <div className='all'>
             <NavBar/>
             <div className= 'home'>
                 <div className='busqueda'>
                     <div className='lala'>              
-                        <Link to= '/recipes'><button className='bt'>Crear receta</button></Link>
-                        {/* <h1>botoncito</h1> */}
+                        <Link to= '/recipes'><button className='bt'>Crear receta</button></Link>                        
                         <SearchBar/>
                     </div> 
                     <div className='lala'>
@@ -88,7 +89,10 @@ console.log(allDiets)
                             </select>
                             <select onChange={e => handleFilterTypes(e)}>
                                 <option value="All">All recipes</option>
-                                <option value="gluten free">Gluten free</option>
+                                {diets.map(d => (
+                                    <option value={d.name}>{d.name}</option>
+                                ))}
+                                {/* <option value="gluten free">Gluten free</option>
                                 <option value="dairy free">Dairy free</option>
                                 <option value="paleolithic">Paleolithic</option>
                                 <option value="lacto ovo vegetarian">Lacto ovo vegetarian</option>
@@ -97,7 +101,7 @@ console.log(allDiets)
                                 <option value="lacto-vegetarian">Lacto-Vegetarian </option>   
                                 <option value="ketogenic">Ketogenic</option> 
                                 <option value="whole 30">Whole 30</option>  
-                                <option value="pescatarian">Pescatarian</option>                            
+                                <option value="pescatarian">Pescatarian</option>                             */}
                             </select>
                             <select onChange={e => handleFilterCreated(e)}>
                                 <option value="all">Todas las Recetas</option>
@@ -105,26 +109,30 @@ console.log(allDiets)
                                 <option value="api">Recetas Api</option>
                             </select>
                         </div>
-                    </div>
-                    <Card/>
-                    {/* traigo las cruds que necesito para el paginado */}
-                    <Paginado 
+                    </div>            
+                </div>
+                {/* traigo las cruds que necesito para el paginado */}
+                <div class="cards">                         
+                    
+                    {
+                        currentRecipes?.map((leo) => {
+                            // console.log(currentRecipes,'home')
+                            return (
+                                <div id='Allcars' className='conteiner'>
+                                    <Link className='link' to={'/recipes/' + leo.id}>
+                                        <Card className='card' name={leo.title} image={leo.img ? leo.img : leo.image} diets={leo.typeDiets} id={leo.id}/>
+                                    </Link> 
+                                </div>
+                            );
+                        })
+                    }            
+                </div>
+                <div className='paginado'>
+                <Paginado 
                     recipesPg= {recipesPg}
                     allRecipes= {allRecipes.length}
                     paginado= {paginado}
                     />
-
-                    {
-                        currentRecipes?.map((leo) => {
-                            return (
-                                <Fragment>
-                                    <Link to={'/home/' + leo.id}>
-                                        <Cards name={leo.name} image={leo.img ? leo.img : leo.image} diet={leo.diet} id={leo.id}/>
-                                    </Link> 
-                                </Fragment>
-                            );
-                        })
-                    }
                 </div>
             </div>
         </div>

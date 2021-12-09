@@ -5,8 +5,8 @@ import './css/cardsRecipe.css'
 export default function Card({image, name, diet}) {
     return(
         <div className='card'>
+            <h4>{name}</h4>
             <img src={image} alt="foto no encontrada"/>
-            <h3>{name}</h3>
             <h6>{diet}</h6>
         </div>
     );

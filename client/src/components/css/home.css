@@ -3,12 +3,21 @@
     padding: 0;
 }
 
+.all{
+height: 1380px;
+
+}
+
 .home {
     width:  100%;
-    height: 625px;
+    height: 1300px;
    
    background: url('../../img/home.jpg') center center no-repeat;
-   background-size: 100% auto;
+   background-size: 100% 1300px;
+
+   display: flex;
+   flex-direction: column;
+  
 }
 
 .busqueda {
@@ -62,9 +71,31 @@
 
 .lala{
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;
     align-items: center;
 }
+ 
+.link {    
+    margin: 10px;
+    float: left;
+   
+}
+.cards{
+   
+    width: 1040px;
+    height: auto;
 
+    position: absolute;
+    top:    280px;
+    left: 190px;
+}
 
+.paginado {
+    position: absolute;
+   
+    display: flex;
+    left: 240px;
+    bottom: -370px;
+
+}
 

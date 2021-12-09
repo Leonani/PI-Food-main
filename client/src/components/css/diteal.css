@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.detaails {
+    width:  1246px;
+    height: auto;
+    padding: 60px;
+   
+   background: url('../../img/bodegon.jpg') center center no-repeat;
+   background-size: 100% auto;
+
+   font-family: 'Indie Flower', cursive;
+   color: white;
+
+   
+}
+
+.contDt {
+    width: 900px;
+    padding: 50px;
+
+    background-color: rgba(3, 3, 3, 0.397);
+    border: solid 4px  rgba(255, 255, 0, 0.719) ;
+    border-radius: 10px;
+
+    margin-left: 100px;
+}
+
+.contDt h1 {
+    font-family: 'Balsamiq Sans', cursive;
+    margin: 25px;
+    color: yellow;
+}
+h5 {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: rgb(255, 255, 0);
+}
+.detaails img{
+    height: 300px;
+    border-radius: 15px;
+    border: solid 3px rgba(255, 255, 0, 0.774);
+}
+
+.art {
+    margin: 15px;
+}
+
+.contDt button {
+    background-color: rgba(255, 255, 0, 0.671);
+    border: solid 3px yellow;
+    border-radius: 5px;
+    height: 60px;
+    width: 100px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: bold;
+}
+
+.contDt button:hover {
+    background-color: rgba(0, 0, 0, 0.678);
+    color: yellow;
+    font-weight: bold;
+}

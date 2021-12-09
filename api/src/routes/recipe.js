@@ -5,15 +5,17 @@ const { Recipe, Diet, Op } = require('../db');
 
 router.post('/', async (req, res) => {
     //hago el post con todo lo que llega del body
-    let{
+    let {
         name,
         summary,
         score,
         healthScore,
         image,
         steps,
-        diets
+        diets,
+        createdINBd
     } = req.body
+   
 
     try{ //creo la receta
         let recipeCreate = await Recipe.create({ 
@@ -23,19 +25,20 @@ router.post('/', async (req, res) => {
             healthScore,
             image,
             steps,
+            createdINBd
             // no se le pasa diets porque tiene la relacion aparte.
         })
-
+        console.log(recipeCreate, 'post')
         //a la dieta la encontramos en el modelo de dietas por eso no lo ponemos en recipeCreate
         let dietDB = await Diet.findAll({ 
             where: {name: diets}
         })
 
-
+        // console.log()
         recipeCreate.addDiet(dietDB) //agregamos la dieta que coincidieron
-        res.send('Dieta creada con exito')
+        res.send(recipeCreate)
     }catch(error){
-        res.status(400).json({message: error?.message | 'Error en carga de datos'})
+        res.status(400).json({error})
     }
 })
 

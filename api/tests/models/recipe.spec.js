@@ -19,4 +19,36 @@ describe('Recipe model', () => {
       });
     });
   });
+
+  describe('Validators', () => {
+    beforeEach(() => Recipe.sync({ force: true }));
+    describe('name', () => {
+      it('Deberia retornar error si le paso null', (done) => {
+        Recipe.create({})
+          .then(() => done(new Error('It requires a valid name')))
+          .catch(() => done());
+      });
+      it('Deberia trabajar bien si le paso un nombre', () => {
+        Recipe.create({ name: 'Pikachu' });
+      });
+    });
+  });
+  
+  describe('Validators', () => {
+    beforeEach(() => Type.sync({ force: true }));
+    describe('name', () => {
+      it('Deberia retornar error si le paso null', (done) => {
+        typeDiets.create({})
+          .then(() => done(new Error('It requires a valid name')))
+          .catch(() => done());
+      });
+      it('Deberia trabajar bien si le paso un nombre', () => {
+        typeDiets.create({ name: 'vegan' });
+      });
+    });
+  });
+  
 });
+
+
+

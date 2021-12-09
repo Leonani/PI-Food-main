@@ -4,11 +4,26 @@
 }
 
 .card {
-    height: 200px;
-    width: 100px;
+    height: 320px;
+    width: 320px;
+    border: rgba(0, 0, 0, 0.637) solid 2px;
+    border-radius: 10px;
+    background-color: rgba(59, 58, 58, 0.842);
+    font-family: 'Roboto Condensed', sans-serif;
+    
+    
 }
 
 .card img {
-    width: 50px;
-    height: 50px;
+    width: auto;
+    height: 210px;
+    margin: 3px;
+}
+.card h4{
+    color: yellow;
+    margin: 10px;
+}
+.card h6 {
+    color: yellow;
+    margin: 5px;
 }
