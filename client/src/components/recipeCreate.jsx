@@ -7,8 +7,8 @@ import './css/recipeCreate.css'
 
 function validate(input) {
     let errors = {};
-    if(!input.title) {
-        errors.title = 'se requiere rellenar la casilla Nombre'
+    if(!input.name) {
+        errors.name = 'se requiere rellenar la casilla Nombre'
     } else if (!input.typeDiets) {
         errors.typeDiets = 'se requiere elegir alguna opcion en Tipo de dieta'
     }
@@ -22,16 +22,18 @@ export default function RecipeCreate() {
     const [errors, setErrors] = useState({});
 
     const [input, setInput] = useState({
-        title: '',
-        typeDiets: [],
-        spoonacularScore: 0,
-        dishTypes: '',
+        name: '',
         summary: '',
+        Score: 0,            
         healthScore: 0,
-        analyzedInstructions: []
+        image:'https://images.ecestaticos.com/kur2mmU6fiXX571utnIfe5RskMY=/0x0:0x0/1200x899/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Ffa4%2F2bd%2F398%2Ffa42bd398ffcbc07efc40870b6436f87.jpg',
+        steps: [],
+        diets: [],
+        createdINBd: true
     })
 
     function handleChange(e) {
+        // console.log(e)
         setInput({
             ...input,
             [e.target.name] : e.target.value
@@ -47,20 +49,21 @@ export default function RecipeCreate() {
         // console.log(input.typeDiets, 'soy el imput diets')
         setInput((input) => ({
             ...input,
-            typeDiets: [...input.typeDiets, e.target.value],
+            diets: [...input.diets, e.target.value],
         }));
         setErrors(validate({
             ...input,
             [e.target.name] : e.target.value 
         }))
     }
+
     // async function handleSubmit(e) {
     //     e.preventDefault();
-    //     console.log(input, 'sjfskl')
+    //     console.log( 'hola')
     //     await dispatch(postRecipes(input))
     //     alert('Receta Creada!!')
     //     setInput({
-    //         title: '',
+    //             title: '',
     //         typeDiets: [],
     //         spoonacularScore: 0,
     //         dishTypes: '',
@@ -70,17 +73,28 @@ export default function RecipeCreate() {
     //     })
     //     history.push('/home')
     // }
+
+    // console.log(input, 'arriba submit')
     async function handleSubmit(e){
+        // console.log(input,'algho')
         e.preventDefault()
         await dispatch(postRecipes(input))
+        // ame,
+        // summary,
+        // score,
+        // healthScore,
+        // image,
+        // steps,
+        // diets,
+        // createdINBd
         setInput({
-            title: '',
-            typeDiets: [],
-            spoonacularScore: 0,
-            dishTypes: '',
+            name: '',
             summary: '',
+            Score: 0,            
             healthScore: 0,
-            analyzedInstructions: []
+            image:'',
+            steps: [],
+            diets: [],
         })
         const result = await dispatch(getDatabase())
         console.log(result)
@@ -90,7 +104,7 @@ export default function RecipeCreate() {
     function handleDelete(e) {
          setInput({
              ...input,
-             typeDiets: input.typeDiets.filter(d => d !==e)
+             diets: input.diets.filter(d => d !==e)
          })
     }
 
@@ -113,7 +127,7 @@ export default function RecipeCreate() {
                         <form onSubmit={e => handleSubmit(e)}>
                             <div className='line'>
                             <label>Nombre:</label>
-                            <input type= 'text' value= {input.title} name='title' onChange={e => handleChange(e)}/>
+                            <input type= 'text' value= {input.name} name='name' onChange={e => handleChange(e)}/>
                                 {errors.name && (
                                     <p className= 'error'>{errors.name}</p>
                                 )}                           
@@ -129,17 +143,17 @@ export default function RecipeCreate() {
                             </select>
                             </div> 
                             <div className='line'>
-                            <ul><li>{input.typeDiets?.map(el => el + ' ,')}</li></ul>
+                            <ul><li>{input.diets?.map(el => el + ', ')}</li></ul>
                             </div>
                             {/* --------------------------------------------------------- */}
                             <div className='line'>
                             <label>Puntaje:</label>
-                            <input type= 'number' value={input.spoonacularScore} name='spoonacularScore' onChange={e => handleChange(e)}/> 
+                            <input type= 'number' value={input.Score} name='Score' onChange={e => handleChange(e)}/> 
                             </div>
-                            <div className='line'>
+                            {/* <div className='line'>
                             <label>Tipo de Plato:</label>
                             <input type= 'text' value={input.dishTypes} name='dishTypes' onChange={e => handleChange(e)}/> 
-                            </div>
+                            </div> */}
                             <div className='line'>
                             <label>Resumen:</label>
                             <input type= 'text' value={input.summary} name='summary' onChange={e => handleChange(e)}/> 
@@ -155,16 +169,16 @@ export default function RecipeCreate() {
                             <div className='line'>
                             <label>Paso a paso:</label>
                             {/* <input type= 'text' value={input.analyzedInstructions} name='analyzedInstructions'/>   */}
-                            <textarea type= 'text' value={input.analyzedInstructions} name='analyzedInstructions' onChange={e => handleChange(e)}></textarea>
+                            <textarea type= 'text' value={input.steps} name='steps' onChange={e => handleChange(e)}></textarea>
                             </div>
                            
-                            <Link to='/home'>
+                            
                             <button className='bts' type='submit'>Crear</button>
-                            </Link>       
+                                  
                             
                         
                         </form>
-                        {input.typeDiets?.map(el => 
+                        {input.diets?.map(el => 
                             <div className='fullElement'>
                                 <div className='element'>
                                     <h3>{el}</h3>

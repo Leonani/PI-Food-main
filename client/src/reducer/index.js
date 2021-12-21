@@ -19,6 +19,7 @@ function rootReducer(state= initialState, action){
                 
             }
         case 'GET_NAME_RECIPES':
+            console.log(action.payload, 'reducer name')
             return{
                 ...state,
                 recipes: action.payload,
@@ -90,7 +91,7 @@ function rootReducer(state= initialState, action){
                 ...state
             }    
         case 'GET_DETAILS':
-            // console.log(action.payload,'reducer')
+            // console.log(action.payload,'reducer det')
             return{
                 ...state,
                 detail: action.payload

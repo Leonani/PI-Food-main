@@ -1,7 +1,7 @@
   import {useState, useEffect} from 'react'
 //hooks
 import {useDispatch, useSelector} from 'react-redux'
-import {getRecipes, filetrRecipesByTypes, filterRecipesByCreated, orderByName} from '../actions/index'
+import {getRecipes, filetrRecipesByTypes, filterRecipesByCreated, orderByName, getDiets} from '../actions/index'
 import {Link} from 'react-router-dom'
 
 
@@ -21,7 +21,7 @@ export default function Home(){
     //-----------------------------------------------------------
 
 
-//08106663368 prisma
+
 
     //------------------paginado home-----------------------------
     const [orden, setOrden] = useState('');
@@ -44,7 +44,8 @@ export default function Home(){
 
     //traigo del estado las recetas cuando el componente se monta -- 
     useEffect(() => {
-        dispatch(getRecipes());  //hook del matchDispatchToProps()
+        dispatch(getRecipes()); //hook del matchDispatchToProps()
+        dispatch(getDiets()); 
     },[dispatch])   //este array es para que no sea infinito
     // console.log(currentRecipes)
    
@@ -62,6 +63,7 @@ export default function Home(){
     function handleFilterCreated(e){
         dispatch(filterRecipesByCreated (e.target.value))
     }
+    console.log(diets,'home')
 
     function handleSort(e){
         e.preventDefault();

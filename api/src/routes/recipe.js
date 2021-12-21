@@ -14,7 +14,8 @@ router.post('/', async (req, res) => {
         steps,
         diets,
         createdINBd
-    } = req.body
+ } = req.body
+    // console.log(req.body)
    
 
     try{ //creo la receta
@@ -28,7 +29,7 @@ router.post('/', async (req, res) => {
             createdINBd
             // no se le pasa diets porque tiene la relacion aparte.
         })
-        console.log(recipeCreate, 'post')
+        // console.log(recipeCreate, 'post api')
         //a la dieta la encontramos en el modelo de dietas por eso no lo ponemos en recipeCreate
         let dietDB = await Diet.findAll({ 
             where: {name: diets}
@@ -38,7 +39,8 @@ router.post('/', async (req, res) => {
         recipeCreate.addDiet(dietDB) //agregamos la dieta que coincidieron
         res.send(recipeCreate)
     }catch(error){
-        res.status(400).json({error})
+        res.status(400).send(error)
+        console.log(error.message)
     }
 })
 

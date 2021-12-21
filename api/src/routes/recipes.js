@@ -101,17 +101,17 @@ router.get('/', async (req,res) => {
         let recipesName = await infoQuery.concat(filtercl);
 
         //si se encuentra devolvemos y si no mje correspondiente
-        recipesName.length?res.status(200).send(error.message):res.status(404).send(eror.message);  
-
+        recipesName.length ? res.status(200).send(recipesName) : res.status(404).send(error.message);  
+        // console.log(recipesName, 'back')
         // si no hay query devolvemos todas las recetas
     } else {
         //traigo info
         let allRecipes = await getAll();
-        // console.log(allRecipes)
+        console.log(allRecipes)
         res.status(200).json(allRecipes)
     }
 })  
-
+//------
 router.get('/data', async (req, res) => {
     const allDb= await getDbInfo()
     if (allDb !== 'error') {

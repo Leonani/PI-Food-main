@@ -41,8 +41,11 @@ export function getDiets(){
 }
 
 export function postRecipes(payload){
+    console.log(payload, '1 pay')
     return async function(dispatch) {
         const data = await axios.post('http://localhost:3001/recipe', payload)
+        
+        console.log(data, 'data')
         return data;
     }
 }
@@ -52,12 +55,14 @@ export function getNameRecipes(name){
     return async function(dispatch){
         try{
             var json = await axios.get('http://localhost:3001/recipes?name=' + name);
+            
             return dispatch({
                 type: 'GET_NAME_RECIPES',
                 payload: json.data
             })
             
         }catch(err){
+            // console.log(json.data,'action name')
             console.log(err)
         }
     }
